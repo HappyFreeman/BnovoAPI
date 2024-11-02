@@ -1,0 +1,440 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Авторизация",
+                "operationId": "e8bda97fbe47048fc48cee733c357440",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "test@examp.com"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MzA1NzE5MDMsImV4cCI6MTczMDU3NTUwMywibmJmIjoxNzMwNTcxOTAzLCJqdGkiOiJrUHlQNXo3eGZPQ3pJVzBwIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Aob4GhH8aw6nUsU-m8jTYXlZj5QJwYZUofbCSXM2HVI"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/visitors": {
+            "get": {
+                "tags": [
+                    "Visitor"
+                ],
+                "summary": "Список",
+                "operationId": "95f1b17a1ca9044cee1bd68f1779154b",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "example@mail.com"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Джон"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Доу"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "+78005553535"
+                                                    },
+                                                    "country": {
+                                                        "type": "string",
+                                                        "example": "Россия"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Visitor"
+                ],
+                "summary": "Создание",
+                "operationId": "7d8e74a7c2148fdf9bc0a7e1d582304a",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "example@mail.com"
+                                            },
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "Джон"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Доу"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "+78005553535"
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "example": "Россия"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "example@mail.com"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Джон"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Доу"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+78005553535"
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": "Россия"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/visitors/{visitor}": {
+            "get": {
+                "tags": [
+                    "Visitor"
+                ],
+                "summary": "Единичная запись",
+                "operationId": "f259cdbdbccfa2f038f730f61c0d1ac1",
+                "parameters": [
+                    {
+                        "name": "visitor",
+                        "in": "path",
+                        "description": "ID гостя",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "example@mail.com"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Джон"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Доу"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+78005553535"
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": "Россия"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Visitor"
+                ],
+                "summary": "Удаление",
+                "operationId": "04bfdcdf9203e551ade95c148bba30fd",
+                "parameters": [
+                    {
+                        "name": "visitor",
+                        "in": "path",
+                        "description": "ID гостя",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "done"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Visitor"
+                ],
+                "summary": "Обновление",
+                "operationId": "85339449b319805e6eed2896423d4a9b",
+                "parameters": [
+                    {
+                        "name": "visitor",
+                        "in": "path",
+                        "description": "ID гостя",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "exampleEdit@mail.com"
+                                            },
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "Джон"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Доу"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "+78005553535"
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "example": "Россия"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "exampleEdit@mail.com"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Джон"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Доу"
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": "+78005553535"
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": "Россия"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "User"
+        },
+        {
+            "name": "Visitor",
+            "description": "Visitor"
+        }
+    ]
+}
