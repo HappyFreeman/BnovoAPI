@@ -1,9 +1,11 @@
 ./vendor/bin/sail artisan migrate --seed
+
 в бд один пользователь будет
 test@examp.com
 password
 
 ./vendor/bin/sail up
+
 http://127.0.0.1 или http://localhost
 
 # API Документация
