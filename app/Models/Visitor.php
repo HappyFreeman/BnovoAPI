@@ -11,6 +11,8 @@ class Visitor extends Model
 
     //protected $table = 'visitors';
 
+    //public static $wrap = "visitors";
+
     protected $fillable = ['email', 'first_name', 'last_name', 'phone', 'country'];
 
 

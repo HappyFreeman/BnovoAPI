@@ -17,7 +17,8 @@ use App\Http\Controllers\Controller;
  *         @OA\JsonContent(
  *             allOf = {
  *                 @OA\Schema(
- *                     @OA\Property(property="email", type="string", example="example@mail.com"),
+ *                     required={"email", "first_name", "last_name", "phone"},
+ *                     @OA\Property(property="email", type="string", format="email", example="example@mail.com"),
  *                     @OA\Property(property="first_name", type="string", example="Джон"),
  *                     @OA\Property(property="last_name", type="string", example="Доу"),
  *                     @OA\Property(property="phone", type="string", example="+78005553535"),
@@ -38,6 +39,28 @@ use App\Http\Controllers\Controller;
  *                 @OA\Property(property="last_name", type="string", example="Доу"),
  *                 @OA\Property(property="phone", type="string", example="+78005553535"),
  *                 @OA\Property(property="country", type="string", example="Россия"),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Токен не предоставлен или срок действия истек или не верный",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="Token not provided"),
+ *                 @OA\Property(property="status_code", type="integer", example=401),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Unprocessable Entity",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="The email field is required."),
+ *             @OA\Property(property="errors", type="object",
+ *                 @OA\Property(property="email", type="array", @OA\Items(
+ *                      example="The email field is required."
+ *                 )),
  *             ),
  *         ),
  *     ),
@@ -62,6 +85,16 @@ use App\Http\Controllers\Controller;
  *                 @OA\Property(property="phone", type="string", example="+78005553535"),
  *                 @OA\Property(property="country", type="string", example="Россия"),
  *             )),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Токен не предоставлен или срок действия истек или не верный",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="Token not provided"),
+ *                 @OA\Property(property="status_code", type="integer", example=401),
+ *             ),
  *         ),
  *     ),
  * ),
@@ -90,6 +123,26 @@ use App\Http\Controllers\Controller;
  *                 @OA\Property(property="last_name", type="string", example="Доу"),
  *                 @OA\Property(property="phone", type="string", example="+78005553535"),
  *                 @OA\Property(property="country", type="string", example="Россия"),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Токен не предоставлен или срок действия истек или не верный",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="Token not provided"),
+ *                 @OA\Property(property="status_code", type="integer", example=401),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Not Found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="No query results for model [App\\Models\\Visitor] 2"),
+ *                 @OA\Property(property="status_code", type="integer", example=404),
  *             ),
  *         ),
  *     ),
@@ -139,6 +192,26 @@ use App\Http\Controllers\Controller;
  *             ),
  *         ),
  *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Токен не предоставлен или срок действия истек или не верный",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="Token not provided"),
+ *                 @OA\Property(property="status_code", type="integer", example=401),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Not Found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="No query results for model [App\\Models\\Visitor] 2"),
+ *                 @OA\Property(property="status_code", type="integer", example=404),
+ *             ),
+ *         ),
+ *     ),
  * ),
  * 
  * 
@@ -160,6 +233,16 @@ use App\Http\Controllers\Controller;
  *         description="OK",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string", example="done"),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Not Found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="object",
+ *                 @OA\Property(property="message", type="string", example="No query results for model [App\\Models\\Visitor] 2"),
+ *                 @OA\Property(property="status_code", type="integer", example=404),
+ *             ),
  *         ),
  *     ),
  * ),

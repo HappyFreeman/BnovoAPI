@@ -27,6 +27,10 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
+        if (!isset($credentials['password'])  || !isset($credentials['email'])) {
+            return response()->json(['error' => 'Missing email or password'], 400);
+        }
+
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }

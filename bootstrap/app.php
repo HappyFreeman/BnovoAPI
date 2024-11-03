@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -24,4 +26,27 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+        $exceptions->renderable(function(NotFoundHttpException $e, $request) {
+            if($request->is('api/*')) {
+                return response()->json([
+                    'error' => [
+                        'message' => $e->getMessage(),
+                        'status_code' => $e->getStatusCode(),
+                    ]
+                ], $e->getStatusCode());
+            }
+        });
+
+        $exceptions->renderable(function(UnauthorizedHttpException $e, $request) {
+            if($request->is('api/*')) {
+                return response()->json([
+                    'error' => [
+                        'message' => $e->getMessage(),
+                        'status_code' => $e->getStatusCode(),
+                    ]
+                ], $e->getStatusCode());
+            }
+        });
+
+
     })->create();

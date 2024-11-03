@@ -19,13 +19,19 @@
                             "schema": {
                                 "allOf": [
                                     {
+                                        "required": [
+                                            "email",
+                                            "password"
+                                        ],
                                         "properties": {
                                             "email": {
                                                 "type": "string",
+                                                "format": "email",
                                                 "example": "test@examp.com"
                                             },
                                             "password": {
                                                 "type": "string",
+                                                "format": "password",
                                                 "example": "password"
                                             }
                                         },
@@ -54,6 +60,38 @@
                                         "expires_in": {
                                             "type": "integer",
                                             "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Неверный логин или пароль",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Отсутствует пароль в Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Missing email or password"
                                         }
                                     },
                                     "type": "object"
@@ -115,6 +153,31 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Токен не предоставлен или срок действия истек или не верный",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Token not provided"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -135,9 +198,16 @@
                             "schema": {
                                 "allOf": [
                                     {
+                                        "required": [
+                                            "email",
+                                            "first_name",
+                                            "last_name",
+                                            "phone"
+                                        ],
                                         "properties": {
                                             "email": {
                                                 "type": "string",
+                                                "format": "email",
                                                 "example": "example@mail.com"
                                             },
                                             "first_name": {
@@ -196,6 +266,58 @@
                                                 "country": {
                                                     "type": "string",
                                                     "example": "Россия"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Токен не предоставлен или срок действия истек или не верный",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Token not provided"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email field is required."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "email": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "example": "The email field is required."
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -271,6 +393,56 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Токен не предоставлен или срок действия истек или не верный",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Token not provided"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "No query results for model [App\\\\Models\\\\Visitor] 2"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 404
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -304,6 +476,31 @@
                                         "message": {
                                             "type": "string",
                                             "example": "done"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "No query results for model [App\\\\Models\\\\Visitor] 2"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 404
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -400,6 +597,56 @@
                                                 "country": {
                                                     "type": "string",
                                                     "example": "Россия"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Токен не предоставлен или срок действия истек или не верный",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "Token not provided"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string",
+                                                    "example": "No query results for model [App\\\\Models\\\\Visitor] 2"
+                                                },
+                                                "status_code": {
+                                                    "type": "integer",
+                                                    "example": 404
                                                 }
                                             },
                                             "type": "object"
