@@ -8,7 +8,7 @@ password
 
 http://127.0.0.1 или http://localhost
 
-# API Документация
+# API Документация /api/documentation
 
 ## Авторизация
 
